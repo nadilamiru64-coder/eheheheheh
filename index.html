@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Totally Normal Website</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            padding-top: 150px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+        }
+
+        #jumpscare {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: black;
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #jumpscare img {
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain;
+        }
+
+        .shake {
+            animation: shake 0.08s infinite;
+        }
+
+        @keyframes shake {
+            0%   { transform: translate(0, 0); }
+            25%  { transform: translate(10px, -10px); }
+            50%  { transform: translate(-10px, 10px); }
+            75%  { transform: translate(10px, 10px); }
+            100% { transform: translate(-10px, -10px); }
+        }
+        #flash {
+    position: fixed;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+.flash-animation {
+    animation: flash 0.12s infinite;
+}
+
+@keyframes flash {
+    0%   { opacity: 0; background: white; }
+    50%  { opacity: 0.2; background: white; }
+    100% { opacity: 0; background: red; }
+}
+    </style>
+</head>
+<body>
+    <div id="flash"></div>
+
+    <div class="container">
+        <h1>🔍 Find the Hidden Image</h1>
+        <p>Can you find what's hidden on this page?</p>
+
+        <button onclick="startPrank()">Start</button>
+    </div>
+
+    <div id="jumpscare">
+        <img id="scareImage" src="jumpscare.jpg">
+    </div>
+
+    <audio id="scream" src="Scream.mp3"></audio>
+
+    <script>
+        function startPrank() {
+
+            // Wait 5 seconds
+            setTimeout(function() {
+                const flash = document.getElementById("flash");
+
+flash.classList.add("flash-animation");
+
+                const scare = document.getElementById("jumpscare");
+                const image = document.getElementById("scareImage");
+                const sound = document.getElementById("scream");
+
+                scare.style.display = "flex";
+
+                image.classList.add("shake");
+
+                sound.volume = 1;
+                sound.play();
+
+            }, 5000);
+        }
+    </script>
+
+</body>
+</html>
